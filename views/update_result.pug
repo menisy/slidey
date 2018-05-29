@@ -1,0 +1,13 @@
+extends layout
+
+append body
+  .container
+    .row
+      .col-md-6
+        if success
+          +alert-success(msg)
+          +a-btn-primary("/present.html") Go to presentation
+        else
+          +alert-danger(msg)
+          +a-btn-info("/brochures") Retry
+          

@@ -1,0 +1,16 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.carousel-inner img{
+  min-width: 90%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.dropzone{
+  border-radius: 5px;
+}

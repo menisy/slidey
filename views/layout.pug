@@ -1,0 +1,10 @@
+extends ../node_modules/pug-bootstrap/_bootstrap
+append styles
+  // Custom styles for this template
+  link(href='../css/style.css', rel='stylesheet')
+
+block body
+  +navbar-fixed("Intervision","navbar","inverse", "/")
+    +nav_item("/") Home
+    +nav_item("/presentation") Presentation
+  .container

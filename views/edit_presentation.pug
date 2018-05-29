@@ -1,0 +1,37 @@
+extends layout
+append styles
+  link(href='../css/basic.min.css', rel='stylesheet')
+  link(href='../css/dropzone.min.css', rel='stylesheet')
+append scripts
+  script(src='../javascripts/dropzone.min.js')
+  script(src='../javascripts/dropzone-init.js')
+  
+append body
+  .container
+    .starter-template
+      .brochures
+      h2 Edit Presentation
+      h3 Upload brochures
+      p
+        |  Upload .pdf brochures here, make sure that the file name is the same as
+        |  the one used in the data-brochure name in the slides.
+      p 
+        | Maximum 4 files at a time.
+      .row
+        .col-md-6
+          form(action='/brochures', method='post', id='brochures-upload', class='dropzone')
+            //-+input("text","bucket-name","Bucket Name", {name: 'bucket', value: 'intervision-b2b'})
+            //-+input("text","brochure-folder-name","Brochure Folder Name", {name: 'folder', value: 'brochures'})
+            //- +input("file","index-file","Brochure .pdf Files", {name: 'pdfFiles'})
+            //- +submit("Update Presentation", 'success')
+            
+      h3 Update Presentation
+      p
+        |  Upload the Slides html file to be linked with the brochures and updated.
+      .row
+        .col-md-6
+          form(action='/presentation',method='post', encType="multipart/form-data")
+            //-+input("text","bucket-name","Bucket Name", {name: 'bucket', value: 'intervision-b2b'})
+            //-+input("text","brochure-folder-name","Brochure Folder Name", {name: 'folder', value: 'brochures'})
+            +input("file","index-file","Slides HTML File", {name: 'htmlFile'})
+            +submit("Update Presentation", 'success')
