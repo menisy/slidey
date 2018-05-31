@@ -11,15 +11,16 @@ append body
     .starter-template
       .brochures
       h2 Edit Presentation
-      h3 Upload brochures
+      h3 Upload Images
       p
-        |  Upload .pdf brochures here, make sure that the file name is the same as
-        |  the one used in the data-brochure name in the slides.
-      p 
-        | Maximum 4 files at a time.
+        |  Upload image series here along with their name that is used
+        |  in the link to that series.
       .row
         .col-md-6
-          form(action='/brochures', method='post', id='brochures-upload', class='dropzone')
+          form(action='/brochures', method='post', id='series-upload', class='dropzone')
+            +input("text", "series-name", "Series Name", {name: 'series-name', required: true})
+            +submit("Upload", 'success submit-all')
+            br
             //-+input("text","bucket-name","Bucket Name", {name: 'bucket', value: 'intervision-b2b'})
             //-+input("text","brochure-folder-name","Brochure Folder Name", {name: 'folder', value: 'brochures'})
             //- +input("file","index-file","Brochure .pdf Files", {name: 'pdfFiles'})

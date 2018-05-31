@@ -4,56 +4,45 @@ const pg = require('pg');
 const path = require('path');
 const fileUpload = require('express-fileupload');
 const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/b2b';
-const s3 = require('../util/s3.js')
-var PDFImage = require("pdf-image").PDFImage;
+const s3 = require('../util/s3.js');
 
 router.use(fileUpload());
 
 router.post('/', (req, res, next) => {
-  console.log('heee');
   console.log(req.files);
+  console.log(req.body);
   if (typeof req.files === 'undefined' || req.files.length < 1){
-    console.log('bowww')
-    console.log(req.body);
     res.render('update_result', {msg: 'Something went wrong!',
                                  success: false});
   }
 
-  console.log('hererere');
-  let brochure = req.files.file;
-  var filename = brochure.name;
-  var name = filename.match(/(.+).pdf$/)[1]
-  var bucketName = 'intervision-b2b'
-  var brochurePath = path.join(__dirname, `/../public/tmp/${filename}`);
+  let files = req.files;
+  const bucketName = 'intervision-b2b';
+  //var brochurePath = path.join(__dirname, `/../public/tmp/${filename}`);
+  const rootName = 'brochures';
+  const seriesName = req.body['series-name'];
+  let filesToUpload = req.files.length;
 
-  console.log('before mv');
-  brochure.mv(brochurePath, function(err){
+  s3.uploadSeries(bucketName, rootName, seriesName, files, function(err, data){
     if(err){
-      console.log(err);
-      return res.status(500).send(err);
+      console.log('Error uploading!');
+      res.status(500).send(err);
+      return;
     }
-    console.log('moved');
-    var pdfImage = new PDFImage(brochurePath, {
-      convertOptions: {
-        "-resize": "1800x1000",
-        "-quality": "100",
-        "-format": "jpg",
-      }
-    });
-    pdfImage.convertFile().then(function (imagePaths) {
-      console.log(imagePaths);
-      s3.uploadBrochure(bucketName, 'brochures', brochure.name, imagePaths, function(err, data){
-        if (err) {
-          console.log("Error", err);
-          res.send(err);
-        } else if (data) {
-          console.log("Upload Success", data);
-          res.send(data);
-      }});
-    }, function(error){
-      console.log(error);
-    });
+    filesToUpload -= 1;
+    if(filesToUpload === 0){
+      console.log('all set!!');
+      res.status(200).send('All Set!');
+    }
   });
+
+
+  // brochure.mv(brochurePath, function(err){
+  //   if(err){
+  //     console.log(err);
+  //     return res.status(500).send(err);
+  //   }
+  // });
 
   // var path = require('path');
   // var imgs = []

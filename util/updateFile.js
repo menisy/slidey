@@ -9,7 +9,7 @@ function carouselItems(rootPath,brochName, pages){
       <div class="item ${(i === 0) ? 'active' : ''}">
         <img style="  min-width: 90%;
           max-width: 100%;
-          margin: 0 auto;"
+          margin: 0 auto;
         data-lazy-loaded="" data-src="${rootPath}/${brochName}/${page}" />
       </div>
     `
@@ -30,9 +30,20 @@ const bootstrapIncludes = `
 `
 const clickListeners = `
   <script>
+  //document.addEventListener('contextmenu', event => event.preventDefault());
   $(document).ready(function(){
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    $('.slide-background video').attr('loop', 'loop');
+    console.log("ready");
+    $('video').attr('loop', 'loop');
+    var playing = false;
+    $('video').on('click', function(e){
+      console.log('heee');
+      if(!playing){
+        this.play();
+      }else{
+        this.pause();
+      }
+      playing = !playing;
+    });
     $('.brochure').each((i, elem) => {
       // var href = elem.href;
       // var regex = /#(broch-(.*))$/;
@@ -92,6 +103,7 @@ const createModals = function(obj, bucketName, rootFolder){
       `
       modals = modals + modal;
     });
+
 
     fs.appendFile(path.join(__dirname, '/../public/present.html'),
       (bootstrapIncludes + modals + clickListeners + styles),

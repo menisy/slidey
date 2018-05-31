@@ -27,7 +27,7 @@ const deleteBrochure = function(){
   return '';
 }
 
-const uploadBrochure = function(bucketName, rootName, name, files, callback){
+const uploadSeries = function(bucketName, rootName, name, files, callback){
   var s3 = new AWS.S3();
 
   files.forEach(function(file){
@@ -36,16 +36,16 @@ const uploadBrochure = function(bucketName, rootName, name, files, callback){
       Key: '',
       ACL: 'public-read',
       Body: '',
-      ContentType: 'image/png'
+      ContentType: file.mimetype
     };
-    var fileStream = fs.createReadStream(file);
-    fileStream.on('error', function(err) {
-      console.log('File Error', err);
-    });
-    uploadParams.Body = fileStream;
+    // var fileStream = fs.createReadStream(file);
+    // fileStream.on('error', function(err) {
+    //   console.log('File Error', err);
+    // });
+    uploadParams.Body = file.data;
     uploadParams.Key = path.join(rootName , name, path.basename(file));
     s3.upload(uploadParams, function (err, data) {
-      //callback(err, data);
+      callback(err, data);
     });
   });
 
@@ -93,7 +93,7 @@ const getBrochures = function(bucketName, rootFolder, callback){
 }
 const s3 = {
   getBrochures,
-  uploadBrochure,
+  uploadSeries,
   deleteBrochure,
 }
 module.exports = s3;
