@@ -27,10 +27,28 @@ const styles = `
 const bootstrapIncludes = `
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.js"></script>
 `
 const clickListeners = `
   <script>
   document.addEventListener('contextmenu', event => event.preventDefault());
+
+  $(function() {
+    //Enable swiping...
+    $(".modal").swipe( {
+      //Generic swipe handler for all directions
+      swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
+        $(this).find('.carousel').carousel('prev');
+      },
+      swipeLeft:function(event, direction, distance, duration, fingerCount, fingerData) {
+        $(this).find('.carousel').carousel('next');
+      },
+      //Default is 75px, set to 0 for demo so any distance triggers swipe
+       threshold:0
+    });
+  });
+
+
   $(document).ready(function(){
     console.log("ready");
     $('.slide-background video').attr('loop', 'loop');
