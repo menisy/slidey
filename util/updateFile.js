@@ -44,24 +44,23 @@ const clickListeners = `
         $(this).find('.carousel').carousel('next');
       },
       //Default is 75px, set to 0 for demo so any distance triggers swipe
-       threshold:0
+       threshold:50
     });
   });
 
-
   $(document).ready(function(){
+
     console.log("ready");
     $('.slide-background video').attr('loop', 'loop');
     var playing = false;
-    $('.slide-background').on('click', function(){
-      console.log('heee');
-      if(!playing){
-        this.play();
-      }else{
-        this.pause();
-      }
-      playing = !playing;
-    });
+    $(document).on('click', 'video', function(){
+       if(!playing){
+         this.play();
+       }else{
+         this.pause();
+       }
+       playing = !playing;
+     });
     $('.brochure').each((i, elem) => {
       // var href = elem.href;
       // var regex = /#(broch-(.*))$/;
@@ -79,9 +78,12 @@ const clickListeners = `
         $('#broch-'+brochName).modal('show');
       });
     });
+
+    vid = $('video');
   });
   </script>
 `
+
 
 const createModals = function(obj, bucketName, rootFolder){
   if(obj.success){
