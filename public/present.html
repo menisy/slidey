@@ -3350,12 +3350,12 @@ ar.progressbar=ar.progress.querySelector("span"),ar.controls=u(ar.wrapper,"aside
         </div>
       
   <script>
-  //document.addEventListener('contextmenu', event => event.preventDefault());
-  $(document).ready(setTimeout(function(){
+  document.addEventListener('contextmenu', event => event.preventDefault());
+  $(document).ready(function(){
     console.log("ready");
-    $('video').attr('loop', 'loop');
+    $('.slide-background video').attr('loop', 'loop');
     var playing = false;
-    $('video').on('click', function(e){
+    $('.slide-background').on('click', function(e){
       console.log('heee');
       if(!playing){
         this.play();
@@ -3381,7 +3381,7 @@ ar.progressbar=ar.progress.querySelector("span"),ar.controls=u(ar.wrapper,"aside
         $('#broch-'+brochName).modal('show');
       });
     });
-  }), 5000);
+  });
   </script>
 
 <style>

@@ -30,12 +30,12 @@ const bootstrapIncludes = `
 `
 const clickListeners = `
   <script>
-  //document.addEventListener('contextmenu', event => event.preventDefault());
+  document.addEventListener('contextmenu', event => event.preventDefault());
   $(document).ready(function(){
     console.log("ready");
-    $('video').attr('loop', 'loop');
+    $('.slide-background video').attr('loop', 'loop');
     var playing = false;
-    $('video').on('click', function(e){
+    $('.slide-background').on('click', function(){
       console.log('heee');
       if(!playing){
         this.play();
