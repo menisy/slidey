@@ -51,16 +51,17 @@ const clickListeners = `
   $(document).ready(function(){
 
     console.log("ready");
-    $('.slide-background video').attr('loop', 'loop');
     var playing = false;
     $(document).on('click', 'video', function(){
-       if(!playing){
-         this.play();
-       }else{
-         this.pause();
-       }
-       playing = !playing;
-     });
+      $('.slide-background video').attr('loop', 'loop');
+      if(!playing){
+        this.play();
+      }else{
+        this.pause();
+      }
+      playing = !playing;
+    });
+
     $('.brochure').each((i, elem) => {
       // var href = elem.href;
       // var regex = /#(broch-(.*))$/;
