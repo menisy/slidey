@@ -2,12 +2,17 @@ extends layout
 append styles
   link(href='../css/basic.min.css', rel='stylesheet')
   link(href='../css/dropzone.min.css', rel='stylesheet')
+  link(href='../css/fontawesome-all.css', rel='stylesheet')
+
 append scripts
   script(src='../javascripts/dropzone.min.js')
   script(src='../javascripts/dropzone-init.js')
-  
+  script(src='https://sdk.amazonaws.com/js/aws-sdk-2.250.1.min.js')
+  script(src='../javascripts/s3-utils.js')
+
 append body
   .container
+    #app
     .starter-template
       .brochures
       h2 Edit Presentation
@@ -25,7 +30,7 @@ append body
             //-+input("text","brochure-folder-name","Brochure Folder Name", {name: 'folder', value: 'brochures'})
             //- +input("file","index-file","Brochure .pdf Files", {name: 'pdfFiles'})
             //- +submit("Update Presentation", 'success')
-            
+
       h3 Update Presentation
       p
         |  Upload the Slides html file to be linked with the brochures and updated.

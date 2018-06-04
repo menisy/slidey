@@ -2,6 +2,10 @@ var AWS = require('aws-sdk');
 var path = require('path');
 var fs = require('fs');
 
+
+
+
+
 function createTree(objects,rootFolder){
 
   var folders = {};

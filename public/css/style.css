@@ -14,3 +14,41 @@ a {
 .dropzone{
   border-radius: 5px;
 }
+
+.album{
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 5px;
+  width: 200px;
+  height: 100px;
+}
+.image{
+  position: relative;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 5px;
+  width: 200px;
+}
+.image img{
+  width: 100px;
+}
+.album span.title{
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 20px 10px;
+  text-align: left;
+  display: inline-block;
+  max-height: 20px;
+  cursor: pointer;
+}
+.album span.title:hover{
+  color: #00c;
+}
+.album span.delete, .image span.delete{
+  float: right;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
