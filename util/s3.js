@@ -81,6 +81,7 @@ const getBrochures = function(bucketName, rootFolder, callback){
 
   s3.listObjects(bucketParams, function(err, data){
     if(err){
+      console.log(err);
       return callback({success: false, data: err});
     }else{
       return callback({

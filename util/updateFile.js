@@ -134,6 +134,7 @@ const createModals = function(obj, bucketName, rootFolder){
         });
   }else{
     console.log('error');
+    console.log(obj.data);
   }
 }
 const updateFile = function(bucketName, rootFolder){
