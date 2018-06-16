@@ -25,30 +25,33 @@ function listAlbums() {
         var prefix = commonPrefix.Prefix;
         var albumName = decodeURIComponent(prefix.replace('/', ''));
         return getHtml([
-          '<li class="album col-md-4">',
+          '<li class="album col-md-3">',
           '<span class="title" onclick="viewAlbum(\'' + albumName + '\')">',
+              '<i class="fa fa-folder-open"></i>',
               albumName,
             '</span>',
             '<span class="btn btn-danger delete" onclick="deleteAlbum(\'' + albumName + '\')">',
-            'x',
+            '<i class="fa fa-trash"> </i>',
             ,'</span>',
           '</li>'
         ]);
       });
       var message = albums.length ?
         getHtml([
+          '<div class="alert alert-warning">',
           '<p>Click on an album name to view it.</p>',
-          '<p>Click on the X to delete the album.</p>'
+          '<p>Click on the <i class="fa fa-trash"> </i> icon to delete the album.</p>',
+          '</div>'
         ]) :
         '<p>You do not have any albums. Please Create album.';
       var htmlTemplate = [
-        '<h2>Albums</h2>',
+        '<h2>Image Albums</h2>',
         message,
         '<ul class="nav albums row">',
           getHtml(albums),
         '</ul>',
-        '<button class="btn btn-success" onclick="createAlbum(prompt(\'Enter Album Name:\'))">',
-          '<i class="fa fa-user"> </i>',
+        '<button class="btn btn-success" onclick="createAlbum(prompt(\'Enter album name, make sure it is the same as the one used in the slides:\'))">',
+          '<i class="fa fa-plus-square"> </i>',
           'Create New Album',
         '</button>'
       ]
@@ -77,6 +80,7 @@ function createAlbum(albumName) {
   if (albumName.indexOf('/') !== -1) {
     return alert('Album names cannot contain slashes.');
   }
+  $('#spinner-top').removeClass('hidden');
   var albumKey = encodeURIComponent(albumName) + '/';
   s3.headObject({Key: albumKey}, function(err, data) {
     if (!err) {
@@ -92,6 +96,8 @@ function createAlbum(albumName) {
       alert('Successfully created album.');
       viewAlbum(albumName);
     });
+
+    $('#spinner-top').addClass('hidden');
   });
 }
 
@@ -130,10 +136,10 @@ function viewAlbum(albumName) {
       return getHtml([
         '<div class="image">',
           '<div>',
-            '<img style="width:128px;height:128px;" src="' + photoUrl + '"/>',
+            '<img style="width:128px;" src="' + photoUrl + '"/>',
           '</div>',
           '<span class="btn btn-danger delete" onclick="deletePhoto(\'' + albumName + "','" + photoKey + '\')">',
-              'X',
+              '<i class="fa fa-trash"></i>',
             '</span>',
           '<div>',
             '<span>',
@@ -143,9 +149,9 @@ function viewAlbum(albumName) {
         '</div>',
       ]);
     });
-    var message = photos.length ?
-      '<p>Click on the X to delete the photo</p>' :
-      '<p>You do not have any photos in this album. Please add photos.</p>';
+    var message = photos.length > 1 ?
+      '<div class="alert alert-warning"><p>Click on the <i class="fa fa-trash"></i> to delete the image</p></div>' :
+      '<div class="alert alert-danger"><p>You do not have any images in this album. Please upload some images.</p></div>';
     var htmlTemplate = [
       '<h4>',
         'Album: ' + albumName,
@@ -154,11 +160,16 @@ function viewAlbum(albumName) {
       '<div>',
         getHtml(photos),
       '</div>',
+      '<br/><br/>',
+      '<label>Upload Images</label>',
       '<input class="control-group" id="photoupload" type="file" accept="image/*" multiple></br>',
       '<button id="addphoto" class="btn btn-success" onclick="addPhoto(\'' + albumName +'\')">',
-        '+ Add Photo',
+        '<i class="fa fa-upload"> </i>',
+        '<span class="add-images">Upload</span>',
       '</button>',
+      '<br/><br/>',
       '<button class="btn btn-warning" onclick="listAlbums()">',
+        '<i class="fa fa-caret-left"> </i>',
         'Back To Albums',
       '</button>',
     ]
@@ -186,19 +197,24 @@ function addPhoto(albumName) {
 
   for(var i = 0; i < files.length ; i++){
 
-    file = files[i];
-
+    var file = files[i];
     var fileName = file.name;
     var albumPhotosKey = encodeURIComponent(albumName) + '/';
-
     var photoKey = albumPhotosKey + fileName;
+
+    if(file.size > 2097152){
+      alert('The image "' + fileName + '" is bigger than 2MB, please resize it and re-upload it.');
+      continue;
+    }
+
     s3.upload({
       Key: photoKey,
       Body: file,
       ACL: 'public-read'
     }, function(err, data) {
       if (err) {
-        return alert('There was an error uploading your photo: ', err.message);
+        console.log(err);
+        return alert('There was an error uploading your image: ', err.message);
       }
       console.log(data);
       alert('Successfully uploaded ' + data.key);
@@ -220,9 +236,9 @@ function addPhoto(albumName) {
 function deletePhoto(albumName, photoKey) {
   s3.deleteObject({Key: photoKey}, function(err, data) {
     if (err) {
-      return alert('There was an error deleting your photo: ', err.message);
+      return alert('There was an error deleting your image: ', err.message);
     }
-    alert('Successfully deleted photo.');
+    alert('Successfully deleted image.');
     viewAlbum(albumName);
   });
 }

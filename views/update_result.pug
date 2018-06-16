@@ -1,6 +1,6 @@
 extends layout
 
-append body
+append content
   .container
     .row
       .col-md-6
@@ -9,5 +9,4 @@ append body
           +a-btn-primary("/present.html") Go to presentation
         else
           +alert-danger(msg)
-          +a-btn-info("/brochures") Retry
-          
+          +a-btn-info("/presentation") Retry

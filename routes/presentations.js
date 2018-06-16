@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
   //       res.send(data.Contents);
   //    }
   // });
-  res.render('edit_presentation', {});
+  res.render('edit_presentation', {title: 'Intervision - Presentation'});
 });
 
 router.post('/', function(req, res, next){
@@ -53,9 +53,9 @@ router.post('/', function(req, res, next){
     if (err){
       return res.status(500).send(err);
     }
-    var bucket = 'intervision-b2b', folder='brochures';
+    var bucket = 'intvsn-b2b', folder='';
     updateFile(bucket, folder);
-    res.render('update_result', {msg: 'File updated successfuly',
+    res.render('update_result', {msg: 'Presentation updated successfuly',
                                  success: true});
   });
 });

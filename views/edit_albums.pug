@@ -1,0 +1,14 @@
+extends layout
+append styles
+  link(href='../css/basic.min.css', rel='stylesheet')
+  link(href='../css/fontawesome-all.css', rel='stylesheet')
+
+append scripts
+  script(src='https://sdk.amazonaws.com/js/aws-sdk-2.250.1.min.js')
+  script(src='../javascripts/s3-utils.js')
+
+append content
+  .container
+    #spinner-top.hidden
+    #app
+      #spinner

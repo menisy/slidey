@@ -1,0 +1,125 @@
+extends layout
+append styles
+  link(href='../css/basic.min.css', rel='stylesheet')
+  link(href='../css/fontawesome-all.css', rel='stylesheet')
+
+
+append content
+  .container
+    .starter-template
+      h2 Documentation
+      .alert.alert-warning.s
+        p
+          |  Please follow these steps carefully to be able to edit and update the presentation.
+      .row
+        .col-md-8
+          ol.steps
+            li
+              p
+                | Visit
+                |
+                a(href="https://slides.com/users/sign_in" target="_blank") slides website
+                |
+                | and login using the credentials that you were provided with.
+              +img-responsive("images/documentation/0.png","Step 0")
+            li
+              p
+                | Choose the "Shared with me" panel and click on the "Open presentation" button.
+              +img-responsive("images/documentation/1.png","Step 1")
+            li
+              p
+                | Navigate to the intended slide where you want to place the button for your images album, then select "Text" component from the left menu.
+              +img-responsive("images/documentation/2.png","Step 2")
+            li
+              p
+                | Place the text component (button) on the slide, you can control different options and styles (colors, border, size, animation...etc) from the left menu.
+              +img-responsive("images/documentation/3.png","Step 3")
+            li
+              p
+                | Click the "Edit HTML" option from the mini-menu on the right
+              +img-responsive("images/documentation/4.png","Step 4")
+            li
+              p
+                | Scroll down to the button HTML code and add the word
+                |
+                |
+                strong.c album
+                |
+                | after sl-block to the class attribute. Also, add and extra attribute named
+                |
+                |
+                strong.c data-album
+                |
+                | as shown and its value should be the
+                |
+                |
+                strong name of the album
+                |
+                | you want to attach to this button, for example
+                |
+                |
+                strong "umc-locations"
+                |
+                | or
+                |
+                strong "umc-floor-plans"
+
+              p.alert.alert-warning
+                i.fa.fa-exclamation-triangle
+                |
+                |
+                strong
+                  | Please make sure that the album names do NOT contain spaces, you can either use single words or use "-" or "_" to seperate multiple words!
+              +img-responsive("images/documentation/5.png","Step 5")
+            li
+              p
+                | From the left menu, choose the "export" option
+              +img-responsive("images/documentation/6.png","Step 6")
+            li
+              p
+                | Then click on "Download HTML". An HTML file will be downloaded, it will be used later to update the presentation.
+              +img-responsive("images/documentation/7.png","Step 7")
+            li
+              p
+                | Navigate your browser to the web app here and choose "Image Albums" from the top menu.
+              +img-responsive("images/documentation/8.png","Step 8")
+            li
+              p
+                | Click on the "Create New Album" button and enter the album name, it should be exactly the same as the one that was used in the slides HTML editor, then press "OK".
+              +img-responsive("images/documentation/9.png","Step 9")
+            li
+              p
+                | You will be redirected to the album page, here you can upload multiple images to be placed in the album. Click on "Choose Files", select multiple images from your computer, then click "Upload".
+              p.alert.alert-warning
+                i.fa.fa-exclamation-triangle
+                |
+                |
+                strong
+                  | Please note that the maximum size per image is 2MB, this limit it made to ensure that your images load quickly within the presentation.
+                  br
+                  br
+                  | Note that the order of the images is in alphabetical order according to their file names.
+              +img-responsive("images/documentation/10.png","Step 10")
+            li
+              p
+                | You will be prompted with every successful image upload.
+              +img-responsive("images/documentation/11.png","Step 11")
+            li
+              p
+                | After the images are successfully uploaded, you can view a preview for the images within each album where you can delete any of them or upload more.
+              +img-responsive("images/documentation/12.png","Step 12")
+            li
+              p
+                | After you are done uploading all the image albums that you need, click on "Update Presentation" from the top menu.
+              p
+                | Click on "Choose File" then upload the presentation HTML file that was downloaded earlier from your computer by clicking on "Update Presentation".
+              +img-responsive("images/documentation/13.png","Step 13")
+            li
+              p
+                | After uploading the presentation file, you will be prompted with a success message. You can then click on "Go to presentation" to try out the updated presentation.
+              +img-responsive("images/documentation/14.png","Step 14")
+          p.alert.alert-warning
+            | For issue reports or support, please contact us at
+            |
+            a(href="mailto:info@intervision-vs.com") info@intervision-vs.com
+

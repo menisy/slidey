@@ -4,7 +4,15 @@ append styles
   link(href='../css/style.css', rel='stylesheet')
 
 block body
-  +navbar-fixed("Intervision","navbar","inverse", "/")
-    +nav_item("/") Home
-    +nav_item("/presentation") Presentation
+  +navbar-fixed("","navbar","inverse", "/")
+    +nav_item("/documentation") Documentation
+    +nav_item("/albums") Image Albums
+    +nav_item("/presentation") Update Presentation
   .container
+    block content
+  .footer
+    | &copy; All rights reserved
+    |
+    a(href="http://intervision-vs.com" target="_blank") Intervision
+    |
+    | #{moment().format('YYYY')}

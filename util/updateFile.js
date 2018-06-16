@@ -25,9 +25,9 @@ const styles = `
 </style>
 `
 const bootstrapIncludes = `
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.js"></script>
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./javascripts/bootstrap.min.js" ></script>
+  <script src="./javascripts/jquery.touchSwipe.min.js"></script>
 `
 const clickListeners = `
   <script>
@@ -62,21 +62,21 @@ const clickListeners = `
       playing = !playing;
     });
 
-    $('.brochure').each((i, elem) => {
+    $('.album').each((i, elem) => {
       // var href = elem.href;
       // var regex = /#(broch-(.*))$/;
       // var match = regex.exec(href);
-      var brochName = $(elem).data('brochure');
+      var brochName = $(elem).data('album');
       $(elem).on('click', (e) => {
         e.preventDefault();
-        $('#broch-'+brochName+ ' img[data-src]').each(function(i, img){
+        $('#'+brochName+ ' img[data-src]').each(function(i, img){
           console.log(img);
           $(img).attr('src', $(img).data('src'));
           img.onload = function() {
             $(img).removeAttr('data-src');
           };
         });
-        $('#broch-'+brochName).modal('show');
+        $('#'+brochName).modal('show');
       });
     });
 
@@ -93,11 +93,11 @@ const createModals = function(obj, bucketName, rootFolder){
     var modals = '';
 
     Object.keys(folders).map(function(objectKey, index) {
-      var rootPath = 'https://s3.eu-west-3.amazonaws.com/'+bucketName+'/'+rootFolder;
+      var rootPath = 'https://s3.eu-west-2.amazonaws.com/'+bucketName;//+'/'+rootFolder;
       var brochureName = objectKey;
       var brochurePages = folders[objectKey];
       var modal = `
-        <div class="modal fade" id="broch-${brochureName}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="${brochureName}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" style="width: 100%" role="document">
             <div class="modal-content">
               <div class="modal-header">

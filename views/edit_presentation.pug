@@ -1,43 +1,19 @@
 extends layout
 append styles
   link(href='../css/basic.min.css', rel='stylesheet')
-  link(href='../css/dropzone.min.css', rel='stylesheet')
   link(href='../css/fontawesome-all.css', rel='stylesheet')
 
-append scripts
-  script(src='../javascripts/dropzone.min.js')
-  script(src='../javascripts/dropzone-init.js')
-  script(src='https://sdk.amazonaws.com/js/aws-sdk-2.250.1.min.js')
-  script(src='../javascripts/s3-utils.js')
-
-append body
+append content
   .container
-    #app
     .starter-template
-      .brochures
-      h2 Edit Presentation
-      h3 Upload Images
-      p
-        |  Upload image series here along with their name that is used
-        |  in the link to that series.
-      .row
-        .col-md-6
-          form(action='/brochures', method='post', id='series-upload', class='dropzone')
-            +input("text", "series-name", "Series Name", {name: 'series-name', required: true})
-            +submit("Upload", 'success submit-all')
-            br
-            //-+input("text","bucket-name","Bucket Name", {name: 'bucket', value: 'intervision-b2b'})
-            //-+input("text","brochure-folder-name","Brochure Folder Name", {name: 'folder', value: 'brochures'})
-            //- +input("file","index-file","Brochure .pdf Files", {name: 'pdfFiles'})
-            //- +submit("Update Presentation", 'success')
-
-      h3 Update Presentation
-      p
-        |  Upload the Slides html file to be linked with the brochures and updated.
+      h2 Update Presentation
+      .alert.alert-warning.s
+        p
+          |  Upload the Slides HTML file to be linked with the image albums and updated.
       .row
         .col-md-6
           form(action='/presentation',method='post', encType="multipart/form-data")
             //-+input("text","bucket-name","Bucket Name", {name: 'bucket', value: 'intervision-b2b'})
             //-+input("text","brochure-folder-name","Brochure Folder Name", {name: 'folder', value: 'brochures'})
-            +input("file","index-file","Slides HTML File", {name: 'htmlFile'})
+            +input("file","index-file","Slides HTML File", {name: 'htmlFile', required: true})
             +submit("Update Presentation", 'success')

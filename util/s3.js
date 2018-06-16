@@ -8,10 +8,12 @@ var fs = require('fs');
 
 function createTree(objects,rootFolder){
 
+  console.log(objects);
+
   var folders = {};
   objects.forEach(function(obj){
     var path = obj.Key;
-    var regex = rootFolder+'\\/(.+)\\/(.+)$';
+    var regex = rootFolder+'(.+)\\/(.+)$';
     var match = path.match(regex)
     if(match && match.length > 0){
       var folder = match[1], filename = match[2];
@@ -27,9 +29,6 @@ function createTree(objects,rootFolder){
   return folders;
 }
 
-const deleteBrochure = function(){
-  return '';
-}
 
 const uploadSeries = function(bucketName, rootName, name, files, callback){
   var s3 = new AWS.S3();
@@ -97,7 +96,6 @@ const getBrochures = function(bucketName, rootFolder, callback){
 }
 const s3 = {
   getBrochures,
-  uploadSeries,
-  deleteBrochure,
+  uploadSeries
 }
 module.exports = s3;

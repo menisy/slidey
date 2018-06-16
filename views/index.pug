@@ -1,6 +1,7 @@
 extends layout
 
-append body
+append content
   .container
     h1= title
     p Welcome to #{title}
+    +a-btn-success("/present.html") Go to presentation

@@ -1,10 +1,13 @@
 body {
-  padding: 50px;
+  padding: 50px 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+#app.alert, .alert.s{
+  max-width: 55%;
 }
 .carousel-inner img{
   min-width: 90%;
@@ -14,13 +17,17 @@ a {
 .dropzone{
   border-radius: 5px;
 }
+ul.row{
+  margin-left: 0px;
+}
 
 .album{
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin: 5px;
-  width: 200px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  /*width: 200px;*/
   height: 100px;
 }
 .image{
@@ -30,6 +37,7 @@ a {
   border-radius: 5px;
   margin: 5px;
   width: 200px;
+  overflow: hidden;
 }
 .image img{
   width: 100px;
@@ -46,9 +54,53 @@ a {
 .album span.title:hover{
   color: #00c;
 }
+.image{
+  display: inline-block;
+}
 .album span.delete, .image span.delete{
   float: right;
   position: absolute;
   top: 5px;
   right: 5px;
+}
+
+.navbar-brand{
+    background-image: url(../images/logo.png);
+    background-size: 60px 60px;
+    display: inline-block;
+    width: 80px;
+    padding: 0;
+    height: 40px !important;
+    background-repeat: no-repeat;
+    height: inherit;
+    content: "";
+}
+#spinner-top{
+  position: absolute;
+  top: 40px;
+  width: 100px;
+  right: 200px;
+}
+#spinner, #spinner-top{
+  content: url('../images/spinner.gif');
+}
+.steps li{
+  margin-bottom: 20px;
+}
+.steps li img{
+  margin: 10px 0px;
+  border: 1px solid #ddd;
+}
+.steps p strong.c{
+  color: #3bf;
+}
+.footer{
+  position: fixed;
+  bottom: 0;
+  background-color: #111;
+  color: #eee;
+  height: 30px;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
 }
