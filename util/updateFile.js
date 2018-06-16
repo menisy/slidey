@@ -129,7 +129,7 @@ const createModals = function(obj, bucketName, rootFolder){
     fs.appendFile(path.join(__dirname, '/../public/present.html'),
       (bootstrapIncludes + modals + clickListeners + styles),
          function (err) {
-          if (err) throw err;
+          if (err) console.log(err);
           console.log('All set!');
         });
   }else{
