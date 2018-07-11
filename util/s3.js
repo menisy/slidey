@@ -95,8 +95,32 @@ const getBrochures = function(bucketName, rootFolder, callback){
     }
   });
 }
+
+const uploadPresentation = function(presentation, callback){
+  var s3 = new AWS.S3(),
+      bucketName = 'intvsn-b2b';
+
+    var uploadParams = {
+      Bucket: bucketName,
+      Key: '',
+      ACL: 'public-read',
+      Body: '',
+      ContentType: 'text/html'
+    };
+    // var fileStream = fs.createReadStream(file);
+    // fileStream.on('error', function(err) {
+    //   console.log('File Error', err);
+    // });
+    uploadParams.Body = presentation;
+    uploadParams.Key = path.join('presentation/' , 'presentation.html');
+    s3.upload(uploadParams, function (err, data) {
+      callback(err, data);
+    });
+}
+
 const s3 = {
   getBrochures,
-  uploadSeries
+  uploadSeries,
+  uploadPresentation
 }
 module.exports = s3;

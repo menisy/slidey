@@ -25,9 +25,9 @@ const styles = `
 </style>
 `
 const bootstrapIncludes = `
-  <link rel="stylesheet" href="./css/bootstrap.min.css">
-  <script src="./javascripts/bootstrap.min.js" ></script>
-  <script src="./javascripts/jquery.touchSwipe.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
 `
 const clickListeners = `
   <script>
@@ -129,8 +129,14 @@ const createModals = function(obj, bucketName, rootFolder){
     fs.appendFile(path.join(__dirname, '/../public/present.html'),
       (bootstrapIncludes + modals + clickListeners + styles),
          function (err) {
-          if (err) console.log(err);
+          if (err) {console.log(err); return false;}
           console.log('All set!');
+          fs.readFile(path.join(__dirname, '/../public/present.html'), 'utf8', function(err, data){
+            s3.uploadPresentation(data, function(err, data){
+              if (err) {console.log(err); return false;}
+              console.log('All cool!!');
+            });
+          });
         });
   }else{
     console.log('error');
