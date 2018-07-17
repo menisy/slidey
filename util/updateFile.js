@@ -7,8 +7,7 @@ function carouselItems(rootPath,brochName, pages){
   pages.forEach((page, i) => {
     carousel = carousel + `
       <div class="item ${(i === 0) ? 'active' : ''}">
-        <img style="  min-width: 90%;
-          max-width: 100%;
+        <img style=" max-width: 100%;
           margin: 0 auto;
         data-lazy-loaded="" data-src="${rootPath}/${brochName}/${page}" />
       </div>
@@ -98,8 +97,8 @@ const createModals = function(obj, bucketName, rootFolder){
       var brochurePages = folders[objectKey];
       var modal = `
         <div class="modal fade" id="${brochureName}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" style="width: 100%" role="document">
-            <div class="modal-content">
+          <div class="modal-dialog" style="width: 100%; height: 100%;" role="document">
+            <div class="modal-content" style="height: auto; min-height: 98%;">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               </div>
