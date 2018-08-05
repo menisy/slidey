@@ -7,9 +7,9 @@ function carouselItems(rootPath,brochName, pages){
   pages.forEach((page, i) => {
     carousel = carousel + `
       <div class="item ${(i === 0) ? 'active' : ''}">
-        <img style=" min-width: 75%;
+        <img style= "min-width: 75%;
         max-width: 100%;
-          margin: 0 auto;
+          margin: 0 auto;"
         data-lazy-loaded="" data-src="${rootPath}/${brochName}/${page}" />
       </div>
     `
